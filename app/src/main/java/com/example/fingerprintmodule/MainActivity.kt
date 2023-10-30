@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bio_authenticator.AuthState
 import com.example.bio_authenticator.Authenticator
-import com.example.bio_authenticator.AuthenticatorImpl
+import com.example.bio_authenticator.AuthenticatorFactory
 import com.example.fingerprintmodule.ui.theme.FingerprintModuleTheme
 
 class MainActivity : AppCompatActivity() {
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun AuthScreen(context: AppCompatActivity) {
-    val authenticator: Authenticator = remember { AuthenticatorImpl() }
+    val authenticator: Authenticator = remember { AuthenticatorFactory.create() }
     val canAuthenticate = remember { mutableStateOf(false) }
     val isLogin = authenticator.getLoginState().collectAsState()
     LaunchedEffect(Unit) {
